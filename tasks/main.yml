@@ -79,7 +79,6 @@
 
 - name: "Copy service"
   become: yes
-  become_user: "{{ wildfly.user }}"
   template:
     src: "wildfly.service.j2"
     dest: "/etc/systemd/system/wildfly.service"
