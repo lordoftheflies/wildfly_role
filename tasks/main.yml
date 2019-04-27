@@ -21,6 +21,12 @@
     create_home: yes
     home: "{{ wildfly.installation_dir }}"
 
+- name: "Create installation directory"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  file:
+    path: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
+    state: directory
 
 - name: "Unarchive a downloads"
   become: yes
