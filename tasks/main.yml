@@ -105,7 +105,7 @@
     {{ wildfly.installation_dir }}/current/bin/add-user.sh -s {{ wildfly.admin.login }} {{ wildfly.admin.password }} &&
     touch {{ wildfly.installation_dir }}/current/.mgmt-users.{{ wildfly.admin.login }}.provisioned"
   args:
-    creates: "{{ wildfly_home_path }}/.mgmt-users.{{ wildfly.admin.login }}.provisioned"
+    creates: "{{ wildfly.installation_dir }}/current/.mgmt-users.{{ wildfly.admin.login }}.provisioned"
 
 - name: "Restart Wildfly AS service"
   become: yes
