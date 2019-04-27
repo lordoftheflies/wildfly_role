@@ -21,26 +21,26 @@
     create_home: yes
     home: "{{ wildfly.installation_dir }}"
 
-- name: "Create installation directory"
-  become: yes
-  become_user: "{{ wildfly.user }}"
-  file:
-    path: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
-    state: directory
+#- name: "Create installation directory"
+#  become: yes
+#  become_user: "{{ wildfly.user }}"
+#  file:
+#    path: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
+#    state: directory
 
 - name: "Unarchive a downloads"
   become: yes
   become_user: "{{ wildfly.user }}"
   unarchive:
     src: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
-    dest: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
+    dest: "{{ wildfly.installation_dir }}"
     remote_src: yes
 
 - name: "Make a symbolic link to current version"
   become: yes
   become_user: "{{ wildfly.user }}"
   file:
-    src: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
+    src: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}"
     dest: "{{ wildfly.installation_dir }}/current"
     state: link
 
