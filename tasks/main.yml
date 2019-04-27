@@ -43,3 +43,8 @@
     src: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
     dest: "{{ wildfly.installation_dir }}/current"
     state: link
+
+- name: ""
+  file:
+    state: absent
+    path: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
