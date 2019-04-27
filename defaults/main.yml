@@ -1,2 +1,6 @@
 ---
 # defaults file for ansible-role-wildfly
+
+wildfly:
+  version: 16.0.0.Final
+  repository_base_url: "download.jboss.org"

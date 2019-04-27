@@ -1,2 +1,7 @@
 ---
 # tasks file for ansible-role-wildfly
+
+- name: "Download binaries"
+  get_url:
+    url: "https://{{ wildfly.repository_base_url }}/wildfly/{{ wildfly.version }}/wildfly-{{ wildfly.version }}.tar.gz"
+    dest: "~/wildfly-{{ wildfly.version }}.tar.gz"
