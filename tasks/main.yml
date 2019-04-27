@@ -47,12 +47,7 @@
   tags:
     - wildfly
 
-- name: "Delete downloaded files"
-  file:
-    state: absent
-    path: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
-  tags:
-    - wildfly
+
 
 - name: "Create service configuration directory"
   become: yes
@@ -89,7 +84,6 @@
   template:
     src: "wildfly.service.j2"
     dest: "/etc/systemd/system/wildfly.service"
-    remote_src: yes
   tags:
     - wildfly
 
@@ -99,3 +93,11 @@
     daemon_reload: yes
     enabled: yes
     name: wildfly.service
+
+
+- name: "Delete downloaded files"
+  file:
+    state: absent
+    path: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
+  tags:
+    - wildfly
