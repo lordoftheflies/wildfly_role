@@ -6,7 +6,8 @@ Before=httpd.service
 [Service]
 Environment=LAUNCH_JBOSS_IN_BACKGROUND=1
 EnvironmentFile=-/etc/wildfly/wildfly.conf
-User=wildfly
+User={{ wildfly.user }}
+Group={{ wildfly.group }}
 LimitNOFILE=102642
 PIDFile=/var/run/wildfly/wildfly.pid
 ExecStart={{ wildfly.installation_dir }}/current/bin/launch.sh $WILDFLY_MODE $WILDFLY_CONFIG $WILDFLY_BIND
