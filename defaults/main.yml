@@ -4,3 +4,5 @@
 wildfly:
   version: 16.0.0.Final
   repository_base_url: "download.jboss.org"
+  download_dir: "~"
+  installation_dir: "/opt/wildfly"

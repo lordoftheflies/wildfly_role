@@ -4,4 +4,36 @@
 - name: "Download binaries"
   get_url:
     url: "https://{{ wildfly.repository_base_url }}/wildfly/{{ wildfly.version }}/wildfly-{{ wildfly.version }}.tar.gz"
-    dest: "~/wildfly-{{ wildfly.version }}.tar.gz"
+    dest: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
+
+- name: "Ensure group wildfly exists"
+  become: yes
+  group:
+    name: "{{ wildfly.group }}"
+    state: present
+
+- name: "Add the user 'wildfly' and create home directory"
+  become: yes
+  user:
+    name: "{{ wildfly.user }}"
+    comment: "Wildfly AS user"
+    group: "{{ wildfly.group }}"
+    create_home: yes
+    home: "{{ wildfly.installation_dir }}"
+
+
+- name: "Unarchive a downloads"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  unarchive:
+    src: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
+    dest: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
+    remote_src: yes
+
+- name: "Make a symbolic link to current version"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  file:
+    src: "{{ wildfly.installation_dir }}/{{ wildfly.version }}"
+    dest: "{{ wildfly.installation_dir }}/current"
+    state: link
