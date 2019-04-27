@@ -77,6 +77,13 @@
   tags:
     - wildfly
 
+- name: "Make launch script executable"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  file:
+    path: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}/bin/launch.sh"
+    mode: "u=xrw,g=xr,o=xr"
+
 - name: "Copy service"
   become: yes
   template:
