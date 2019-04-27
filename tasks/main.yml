@@ -74,7 +74,6 @@
   template:
     src: "launch.sh.j2"
     dest: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}/bin/launch.sh"
-    remote_src: yes
   tags:
     - wildfly
 
