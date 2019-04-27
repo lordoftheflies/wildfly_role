@@ -73,3 +73,29 @@
   tags:
     - wildfly
 
+- name: "Copy launch script"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  template:
+    src: "launch.sh.j2"
+    dest: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}/bin/launch.sh"
+    remote_src: yes
+  tags:
+    - wildfly
+
+- name: "Copy service"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  template:
+    src: "wildfly.service.j2"
+    dest: "/etc/systemd/system/wildfly.service"
+    remote_src: yes
+  tags:
+    - wildfly
+
+- name: "Restart Wildfly AS service"
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+    name: wildfly.service
