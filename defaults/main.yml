@@ -8,3 +8,6 @@ wildfly:
   repository_base_url: "download.jboss.org"
   download_dir: "/home/ansible"
   installation_dir: "/opt/wildfly"
+  admin:
+    login: wildfly
+    password: qwe123
