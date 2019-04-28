@@ -101,11 +101,7 @@
 #    - wildfly
 
 - name: "Create management users"
-  shell: ">
-    {{ wildfly.installation_dir }}/current/bin/add-user.sh -s {{ wildfly.admin.login }} {{ wildfly.admin.password }} &&
-    touch {{ wildfly.installation_dir }}/current/.mgmt-users.{{ wildfly.admin.login }}.provisioned"
-  args:
-    creates: "{{ wildfly.installation_dir }}/current/.mgmt-users.{{ wildfly.admin.login }}.provisioned"
+  command: "{{ wildfly.installation_dir }}/current/bin/add-user.sh -s {{ wildfly.admin.login }} {{ wildfly.admin.password }}"
 
 - name: "Restart Wildfly AS service"
   become: yes
