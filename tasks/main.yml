@@ -112,3 +112,17 @@
     daemon_reload: yes
     enabled: yes
     name: wildfly.service
+
+- name: "Apapache configuration"
+  become: yes
+  template:
+    src: "wildfly.apache.conf.j2"
+    dest: "/etc/apache2/sites-available/wildfly.conf"
+  tags:
+    - wildfly
+
+- name: "Restart Apache service"
+  become: yes
+  systemd:
+    state: restarted
+    name: apache2.service

@@ -11,3 +11,5 @@ wildfly:
   admin:
     login: wildfly
     password: qwe123
+  domain: wildfly.cherubits.hu
+  port: 8080
