@@ -101,6 +101,8 @@
 #    - wildfly
 
 - name: "Create management users"
+  become: yes
+  become_user: "{{ wildfly.user }}"
   command: "{{ wildfly.installation_dir }}/current/bin/add-user.sh -s {{ wildfly.admin.login }} {{ wildfly.admin.password }}"
 
 - name: "Restart Wildfly AS service"
