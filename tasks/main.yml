@@ -1,104 +1,104 @@
 ---
 # tasks file for ansible-role-wildfly
-#
-#- name: "Download binaries"
-#  get_url:
-#    url: "https://{{ wildfly.repository_base_url }}/wildfly/{{ wildfly.version }}/wildfly-{{ wildfly.version }}.tar.gz"
-#    dest: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
-#  tags:
-#    - wildfly
-#
-#- name: "Ensure group wildfly exists"
-#  become: yes
-#  group:
-#    name: "{{ wildfly.group }}"
-#    state: present
-#  tags:
-#    - wildfly
-#
-#- name: "Add the user 'wildfly' and create home directory"
-#  become: yes
-#  user:
-#    name: "{{ wildfly.user }}"
-#    comment: "Wildfly AS user"
-#    group: "{{ wildfly.group }}"
-#    create_home: yes
-#    home: "{{ wildfly.installation_dir }}"
-#  tags:
-#    - wildfly
-#
-#- name: "Unarchive a downloads"
-#  become: yes
-#  become_user: "{{ wildfly.user }}"
-#  unarchive:
-#    src: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
-#    dest: "{{ wildfly.installation_dir }}"
-#    remote_src: yes
-#  tags:
-#    - wildfly
-#
-#- name: "Make a symbolic link to current version"
-#  become: yes
-#  become_user: "{{ wildfly.user }}"
-#  file:
-#    src: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}"
-#    dest: "{{ wildfly.installation_dir }}/current"
-#    state: link
-#  tags:
-#    - wildfly
-#
-#
-#
-#- name: "Create service configuration directory"
-#  become: yes
-#  file:
-#    path: "/etc/wildfly"
-#    state: directory
-#  tags:
-#    - wildfly
-#
-#- name: "Initialize configuration"
-#  become: yes
-#  template:
-#    src: wildfly.conf.j2
-#    dest: /etc/wildfly/wildfly.conf
-#    owner: root
-#    group: root
-#    mode: u=rw,g=r,o=r
-#  tags:
-#    - wildfly
-#
-#- name: "Copy launch script"
-#  become: yes
-#  become_user: "{{ wildfly.user }}"
-#  template:
-#    src: "launch.sh.j2"
-#    dest: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}/bin/launch.sh"
-#  tags:
-#    - wildfly
-#
-#- name: "Make launch script executable"
-#  become: yes
-#  become_user: "{{ wildfly.user }}"
-#  file:
-#    path: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}/bin/launch.sh"
-#    mode: "u=xrw,g=xr,o=xr"
-#
-#- name: "Copy service"
-#  become: yes
-#  template:
-#    src: "wildfly.service.j2"
-#    dest: "/etc/systemd/system/wildfly.service"
-#  tags:
-#    - wildfly
-#
-#
-#- name: "Delete downloaded files"
-#  file:
-#    state: absent
-#    path: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
-#  tags:
-#    - wildfly
+
+- name: "Download binaries"
+  get_url:
+    url: "https://{{ wildfly.repository_base_url }}/wildfly/{{ wildfly.version }}/wildfly-{{ wildfly.version }}.tar.gz"
+    dest: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
+  tags:
+    - wildfly
+
+- name: "Ensure group wildfly exists"
+  become: yes
+  group:
+    name: "{{ wildfly.group }}"
+    state: present
+  tags:
+    - wildfly
+
+- name: "Add the user 'wildfly' and create home directory"
+  become: yes
+  user:
+    name: "{{ wildfly.user }}"
+    comment: "Wildfly AS user"
+    group: "{{ wildfly.group }}"
+    create_home: yes
+    home: "{{ wildfly.installation_dir }}"
+  tags:
+    - wildfly
+
+- name: "Unarchive a downloads"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  unarchive:
+    src: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
+    dest: "{{ wildfly.installation_dir }}"
+    remote_src: yes
+  tags:
+    - wildfly
+
+- name: "Make a symbolic link to current version"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  file:
+    src: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}"
+    dest: "{{ wildfly.installation_dir }}/current"
+    state: link
+  tags:
+    - wildfly
+
+
+
+- name: "Create service configuration directory"
+  become: yes
+  file:
+    path: "/etc/wildfly"
+    state: directory
+  tags:
+    - wildfly
+
+- name: "Initialize configuration"
+  become: yes
+  template:
+    src: wildfly.conf.j2
+    dest: /etc/wildfly/wildfly.conf
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  tags:
+    - wildfly
+
+- name: "Copy launch script"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  template:
+    src: "launch.sh.j2"
+    dest: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}/bin/launch.sh"
+  tags:
+    - wildfly
+
+- name: "Make launch script executable"
+  become: yes
+  become_user: "{{ wildfly.user }}"
+  file:
+    path: "{{ wildfly.installation_dir }}/wildfly-{{ wildfly.version }}/bin/launch.sh"
+    mode: "u=xrw,g=xr,o=xr"
+
+- name: "Copy service"
+  become: yes
+  template:
+    src: "wildfly.service.j2"
+    dest: "/etc/systemd/system/wildfly.service"
+  tags:
+    - wildfly
+
+
+- name: "Delete downloaded files"
+  file:
+    state: absent
+    path: "{{ wildfly.download_dir }}/wildfly-{{ wildfly.version }}.tar.gz"
+  tags:
+    - wildfly
 
 - name: "Create management users"
   become: yes
@@ -113,7 +113,7 @@
     enabled: yes
     name: wildfly.service
 
-- name: "Apapache configuration"
+- name: "Apache configuration"
   become: yes
   template:
     src: "wildfly.apache.conf.j2"
