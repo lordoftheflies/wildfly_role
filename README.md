@@ -6,7 +6,8 @@ Role for configure Wildfly as a systemd service in Ubuntu 18.04 LTS.
 Requirements
 ------------
 
-Wildfly needs JDK8+ (geerlingguy.java)
+Ansible sudoer user must exists on the remote machine and public ssh key needs to added to authorized hosts. 
+Wildfly needs JDK8+.
 
 Role Variables
 --------------
