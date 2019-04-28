@@ -1,4 +1,4 @@
-Role Name
+Ansible Role for Wildfly AS
 =========
 
 Role for configure Wildfly as a systemd service in Ubuntu 18.04 LTS.
